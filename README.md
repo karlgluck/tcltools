@@ -3,7 +3,7 @@ TclTools
 
 This library contains a lot of common time-saving functionality into a single package:
 
-+ Inline self-tests with [Jasimne-like](http://pivotal.github.io/jasmine/) syntax
++ Inline self-tests with [Jasmine-like](http://pivotal.github.io/jasmine/) syntax
 + [Tcl language extensions](./1.0/src/tclx.tcl) such as static variables, once-executed code and forsearch loops
 + Runtime sanity checking with [`assert`](./1.0/src/assert.tcl) & [`confirm`](./1.0/src/confirm.tcl)
 + List, set & stack manipulation
@@ -94,8 +94,8 @@ Code Examples
 =============
 
 
-@on, @off, @proc
-----------------
+[@on, @off, @proc](./pkgIndex.tcl)
+----------------------------------
 
 These functions control "@" procedures that can be toggled between normal behavior and running a no-op.
 
@@ -215,6 +215,7 @@ proc demo {} {
     fwrite $path "hello!"
 # the file at $path will be deleted here
 }
+```
 
 [fget_lines](./1.0/src/fileutils.tcl)
 -------------------------------------
@@ -287,7 +288,7 @@ set contents [fread_binary $path]
 
 
 [fread_nonblocking_dispatch](./1.0/src/fileutils.tcl), [fread_nonblocking_collect](./1.0/src/fileutils.tcl)
------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 
 Provides easy access to the nonblocking I/O mode of `fread` where files are opened in parallel. This is faster than opening, reading and closing many files sequentially.
 
@@ -697,8 +698,8 @@ Terminal
 
 Use `package require tcltools.terminal` to get access to commands in this module.
 
-[`TOOL_CLI`](./1.0/src/terminal/terminal.tcl)
----------------------------------------------
+[TOOL_CLI](./1.0/src/terminal/terminal.tcl)
+-------------------------------------------
 
 Call this first in a command-line tool to make it easy to process POSIX and Unix-style command line arguments.
 
@@ -739,8 +740,8 @@ TOOL_CLI "This tool does something awesome!" {
 }
 ```
 
-[`terminal`](./1.0/src/terminal/terminal.tcl)
----------------------------------------------
+[terminal](./1.0/src/terminal/terminal.tcl)
+-------------------------------------------
 
 Terminal commands that manipulate stdout in Linux.
 
@@ -889,6 +890,3 @@ terminal reset
 terminal write "\nNow we are reset.\n\n\n"
 ```
 
-
-# set noet et
-# set ts=4
