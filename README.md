@@ -97,7 +97,7 @@ Code Examples
 [@on, @off, @proc](./pkgIndex.tcl)
 ----------------------------------
 
-These functions control "@" procedures that can be toggled between normal behavior and running a no-op.
+These functions control `@` procedures that can be toggled between normal behavior and running a no-op.
 
 ```tcl
 @on print
@@ -108,7 +108,7 @@ These functions control "@" procedures that can be toggled between normal behavi
 @on print
 @print "But this will print again!"
 ```
-Use `@proc` to declare procedures just like 'proc' that have this toggleable behavior. Tcltools uses this internally quite extensively to allow debug/release code and allow self-testing to be declared inline and enabled as necessary.
+Use `@proc` to declare procedures just like `proc` that have this toggleable behavior. Tcltools uses this internally quite extensively to allow debug/release code and allow self-testing to be declared inline and enabled as necessary.
 
 `@proc` methods are off by default. However, the order of declaration between `@on`/`@off`/`@proc` is not important so if a procedure is set `@on` before it is declared, it will be enabled. The main thing to remember is that the method cannot be used until it is defined with `@proc`.
 
@@ -173,7 +173,7 @@ During a bug-hunt, developers can turn on assumption reporting, run the app and 
 }
 ```
 
-Because of how the @assume function works, it is best to contain your entire application within a single "main" function that only returns when the application exits, and exits only by returning (rather than via 'exit' or similar mechanisms).
+Because of how the `@assume` function works, it is best to contain your entire application within a single *main* function that only returns when the application exits, and exits only by returning (rather than via `exit` or similar mechanisms).
 
 
 [@confirm](./1.0/src/confirm.tcl)
@@ -189,6 +189,8 @@ confirm {[llength $lst] > 0} then {
 }
 ```
 
+File-System Functions
+=====================
 
 [fmake_tmp_dir](./1.0/src/fileutils.tcl)
 ----------------------------------------
@@ -252,7 +254,7 @@ fforeach_line line [set fp [open "input_file.txt" "r"]] {
 [fsize](./1.0/src/fileutils.tcl)
 --------------------------------
 
-Returns the size of the file referenced by the input file pointer in bytes. If the file pointer is not seekable, this will return -1.
+Returns the size of the file referenced by the input file pointer in bytes. If the file pointer is not seekable, this will return `-1`.
 
 ```tcl
 set bytes [fsize $fp]
@@ -346,6 +348,9 @@ Returns the normalized path to a file or directory without passing through soft-
 set path [realpath $path]
 ```
 
+List Functions
+==============
+
 [lvarcat](./1.0/src/lists.tcl)
 ------------------------------
 
@@ -414,7 +419,7 @@ set avg [laverage [list -3 2.5 9 16 9 278.2]]
 [lempty](./1.0/src/lists.tcl), [lnotempty](./1.0/src/lists.tcl)
 ---------------------------------------------------------------
 
-Shortcut for determining whether the list is empty or has at least one element. Useful for making if{} statements more readable.
+Shortcut for determining whether the list is empty or has at least one element. Useful for making `if {}` statements more readable.
 
 ```tcl
 if {[lempty $input]} { error "needs input!" }
@@ -435,22 +440,23 @@ set u [lunique [list a b b c c c -1]] ; # u == {a b c -1}
 
 Reorders the first list so that any elements present in the second list are in the same order as those in the second list, and any elements not present in the second list are moved to the end.
 
-This is handy for using in combination with intersect3 when you want the order of the intersected elements to be preserved. 
+This is handy for using in combination with `intersect3` when you want the order of the intersected elements to be preserved. 
 
+```tcl
 set contents [list "foo" "e" "d" "c" "b" "a"]
 set order [list "a" "Q" "b" "Z" "c" "d" "f" "e"]
 set reordered [lreorder $contents $order]
 # reordered == {a b c d e foo}
-
+```
 
 [lintersect](./1.0/src/lists.tcl)
 ---------------------------------
 
-Returns the intersection of two lists, *preserving duplicates*.
+Returns the intersection of two lists, preserving duplicates but not necessarily order.
 
 ```tcl
-set r [lintersect {a a b} {a a c}]
-# r == {a a}
+set r [lintersect {a a b d} {a a c d}]
+# r == {d a a}
 ```
 
 [lsubtract](./1.0/src/lists.tcl)
@@ -496,7 +502,7 @@ If an existing function is used, the syntax is:
 lprocess $list function_name
 ```
 
-A new list is built from the returned values of the code.  Values are concatenated to the list being returned, so a return value of {} will add nothing to the output and effectively act as a filter.
+A new list is built from the returned values of the code.  Values are concatenated to the list being returned, so a return value of `{}` will add nothing to the output and can be used to build a filter.
 
 [linterleave](./1.0/src/lists.tcl)
 ----------------------------------
@@ -519,7 +525,7 @@ set output [ltranspose $list2d]
 [forsearch](./1.0/src/tclx.tcl)
 -------------------------------
 
-The 'forsearch' construct allows you to express a common functional idea:  look through each element in a list until an element meeting some requirements is found, then break.  If no element is found, execute some code.
+The `forsearch` construct allows you to express a common functional idea:  look through each element in a list until an element meeting some requirements is found, then break.  If no element is found, execute some code.
 
 ```tcl
 forsearch line $lines {
@@ -557,7 +563,7 @@ eval $state_code ; # restore global variables, function definitions, etc.
 
 Schedules a piece of code to be run when the top-level function in the call stack returns.
 
-For complex programs with a 'main' function, this is effectively when the program terminates as long as termination is not done by killing the interpreter (i.e. it won't trigger if 'exit' is used).
+For complex programs with a 'main' function, this is effectively when the program terminates as long as termination is not done by killing the interpreter (i.e. it won't trigger if `exit` is used).
 
 ```tcl
 proc bar {} {
@@ -618,7 +624,7 @@ Use `package require tcltools.diagnostics` to get access to commands in this mod
 [@describe](./1.0/src/diagnostics/diagnostics.tcl)
 --------------------------------------------------
 
-Defines a testing framework for TclTools.  This framework can be accessed by asking for the package "tcltools.diagnostics".  The functionality it provides is based on the Jasmine library for JavaScript.
+Defines a testing framework for TclTools.  This framework can be accessed by asking for the package `tcltools.diagnostics`.  The functionality it provides is based on the Jasmine library for JavaScript.
 
 None of this code is executed unless `@describe` is turned `@on`.
 
@@ -626,8 +632,7 @@ None of this code is executed unless `@describe` is turned `@on`.
 Can have other descriptions in it, or functionality descriptions.
 
 ###`it "performs some function" { <code> }`
-A description of some functionality that is being performed.  Contains expectations.  This
-is evaluated in the context of a `@describe`
+A description of some functionality that is being performed.  Contains expectations.  This is evaluated in the context of an `@describe`
 
 ###`beforeEach { <code> }`
 Evaluates some code before every "it" in an @describe block
@@ -790,10 +795,10 @@ Erases text from the current cursor position to the end of the line
 All effects below last until the next `terminal reset`
 
 *`terminal color <color>`*
-Changes the foreground color of text to one of: `black red green yellow blue magenta cyan white default`
+Changes the foreground color of text to one of: `black` `red` `green` `yellow` `blue` `magenta` `cyan` `white` `default`
 
 *`terminal bgcolor <color>`*
-Changes the background color of text to one of: `black red green yellow blue magenta cyan white default`
+Changes the background color of text to one of: `black` `red` `green` `yellow` `blue` `magenta` `cyan` `white` `default`
 
 *`terminal emphasis`*
 Emphasize text (actual effect varies)
@@ -821,7 +826,7 @@ Remove all current text effects and reset to default
 
 *`terminal write <strong> ?<arg 0>? ?<arg 1>?`*
 
-Allows the rest of the commands to be accessed in text strings via markup.  Based on an implementation from [http://wiki.tcl.tk/37261].
+Allows the rest of the commands to be accessed in text strings via markup.  Based on an implementation from http://wiki.tcl.tk/37261.
 
 ```
 POSITIONING
