@@ -9,7 +9,7 @@ This library contains a lot of common time-saving functionality into a single pa
 + List, set & stack manipulation
 + Simple command-line interface creation with built-in usage guides
 + Linux terminal commands for cursor position, colors, and styles like awesome blinking text
-+ "@" function framework that allows procedures to be toggled between normal behavior and no-ops
++ `@` function framework that allows procedures to be toggled between normal behavior and no-ops
 + Functions for temporary files/directories that automatically delete themselves
 + Nonblocking I/O
 + Debug- or release-mode code gates
