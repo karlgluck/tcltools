@@ -354,3 +354,40 @@ proc unique_key  {}  {
   return $t$u
 }
 
+#-------------------------------------------------------------------------------
+# Puts a number into base62 format
+#
+#  Authors:
+#    Karl Gluck
+#-------------------------------------------------------------------------------
+proc base62 {number} {
+    if {$number == 0} { return "0" }
+    if {$number < 0} { return "-[base62 [expr {abs(number)}]]" }
+
+    array set char2num {}
+    array set num2char {}
+    for {set i 0} {$i < 10} {incr i} {
+        set char2num($i) $i
+    }
+    for {set i 0} {$i < 26} {incr i} {
+        # Capitals
+        set char2num([format %c [expr {65+$i}]]) [expr {10+$i}]
+        # Lowercase
+        set char2num([format %c [expr {97+$i}]]) [expr {10+26+$i}]
+    }
+
+    foreach {k v} [array get char2num] {
+        set num2char($v) $k
+    }
+
+    # translate number to characters
+    set place 0
+    set str ""
+    while {$number > 0} {
+        set digit [expr {$number % [array size num2char]}]
+        set str "$num2char(${digit})${str}"
+        set number [expr {$number / [array size num2char]}]
+    }
+
+    return $str
+}
