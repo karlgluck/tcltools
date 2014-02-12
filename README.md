@@ -29,7 +29,7 @@ package require tcltools
 What about self-testing?
 ------------------------
 
-This library has inline self-tests written immediately after most procedure declarations. The tests can be launched by running [`diagnose`](./1.0/test/diagnose) in the test directory. If all goes well, you'll get an output like this:
+This library has inline self-tests written immediately after most procedure declarations. The tests can be launched by running [`diagnose`](./1.0/test/diagnose) in the test directory. If all goes well, you'll get output like this:
 
 ```
 ####################################################################################################
@@ -108,9 +108,9 @@ These functions control `@` procedures that can be toggled between normal behavi
 @on print
 @print "But this will print again!"
 ```
-Use `@proc` to declare procedures just like `proc` that have this toggleable behavior. Tcltools uses this internally quite extensively to allow debug/release code and allow self-testing to be declared inline and enabled as necessary.
+Use `@proc` to declare procedures just like `proc` that have this toggleable behavior. TclTools uses this internally for debug/release-only code. It also permits self-testing to be declared inline but only run when explicitly requested.
 
-`@proc` methods are off by default. However, the order of declaration between `@on`/`@off`/`@proc` is not important so if a procedure is set `@on` before it is declared, it will be enabled. The main thing to remember is that the method cannot be used until it is defined with `@proc`.
+`@proc` methods are off by default. However, the order of declaration between `@on`/`@off`/`@proc` is not important. If a procedure is set `@on` before it is declared, it will be enabled. The main thing to remember is that the method cannot be used until it is defined with `@proc`.
 
 [@debug, @release](./1.0/src/debug_release.tcl)
 -----------------------------------------------
