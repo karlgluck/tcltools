@@ -3,7 +3,7 @@ TclTools
 
 This library contains a lot of common time-saving functionality into a single package:
 
-+ Inline self-tests with [Jasmine-like](http://pivotal.github.io/jasmine/) syntax
++ Inline self-tests with [Jasmine-like](https://jasmine.github.io/) syntax
 + [Tcl language extensions](./1.0/src/tclx.tcl) such as static variables, once-executed code and forsearch loops
 + Runtime sanity checking with [`assert`](./1.0/src/assert.tcl) & [`confirm`](./1.0/src/confirm.tcl)
 + List, set & stack manipulation
